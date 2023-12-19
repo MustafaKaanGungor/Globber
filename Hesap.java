@@ -4,6 +4,7 @@ public class Hesap {
     private String kayitTarihi;
     private String dogumTarihi;
     private String cinsiyet;
+    private String bio;
 
     public String getKullaniciAd() {
         return kullaniciAd;
@@ -37,5 +38,12 @@ public class Hesap {
         this.cinsiyet = cinsiyet;
     }
 
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
 }
