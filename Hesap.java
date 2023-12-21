@@ -1,5 +1,6 @@
 public class Hesap {
     private String kullaniciAd;
+    private String hesapSifresi;
     //TODO: Profil fotosu değişkeni ekle
     private String kayitTarihi;
     private String dogumTarihi;
@@ -12,6 +13,14 @@ public class Hesap {
 
     public void setKullaniciAd(String kullaniciAd) {
         this.kullaniciAd = kullaniciAd;
+    }
+
+    public String getKullaniciSifre() {
+        return hesapSifresi;
+    }
+
+    public void setKullaniciSifre(String kullaniciSifre) {
+        this.hesapSifresi = kullaniciSifre;
     }
 
     public String getKayitTarihi() {
