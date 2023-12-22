@@ -47,7 +47,7 @@ public class Hesap {
         this.bio = bio;
     }
 }
-
+/* 
 class KullaniciIslemleri {
 
     // Kullanıcı kaydı oluşturma metodu
@@ -94,5 +94,5 @@ class KullaniciIslemleri {
     Hesap kullanici = kullaniciIslemleri.kullaniciKaydiOlustur(); // Kullanıcı kaydı oluşturmak için
 
     kullaniciIslemleri.kullaniciBilgileriniGoruntule(kullanici);// Oluşturulan kullanıcının bilgilerini görüntülemek için
-}
+} */
 
