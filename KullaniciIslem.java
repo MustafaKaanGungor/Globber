@@ -9,4 +9,17 @@ public interface KullaniciIslem {
     //blog beğenme, yorum yapma, var olan yorumu beğenme
     //yazar takip etme
     //tag takip etmest
+    void yorumYap();
+
+    void yorumunuSil();
+
+    void yazarTakipEt();
+
+    void yazarTakiptenCik();
+
+    void tagTakipEt();
+
+    void tagTakiptenCik();
+
+    void blogOku();
 }

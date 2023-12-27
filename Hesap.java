@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Hesap {
     private String kullaniciAd;
     private String kayitTarihi;
@@ -47,6 +45,3 @@ public class Hesap {
         this.bio = bio;
     }
 }
-
-
-
