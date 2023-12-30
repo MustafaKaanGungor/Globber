@@ -1,6 +1,11 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Yazar extends Hesap implements YazarIslem, KullaniciIslem{
+    Yazar(String kullaniciAd, LocalDate kayitTarihi, String dogumTarihi, String cinsiyet) {
+        super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet);
+        //TODO Auto-generated constructor stub
+    }
     ArrayList<BlogYazisi> yazilanBloglar = new ArrayList<BlogYazisi>();
     int yazilanBlogSayisi;
     ArrayList<Kullanici> takipciler = new ArrayList<Kullanici>();

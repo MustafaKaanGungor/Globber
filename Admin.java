@@ -1,4 +1,11 @@
+import java.time.LocalDate;
+
 public class Admin extends Hesap implements KullaniciIslem, YazarIslem{
+
+    Admin(String kullaniciAd, LocalDate kayitTarihi, String dogumTarihi, String cinsiyet) {
+        super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet);
+        //TODO Auto-generated constructor stub
+    }
 
     @Override
     public void yazarTakipEt() {
