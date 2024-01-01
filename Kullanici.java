@@ -2,8 +2,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Kullanici extends Hesap implements KullaniciIslem{
-    Kullanici(String kullaniciAd, LocalDate kayitTarihi, String dogumTarihi, String cinsiyet) {
-        super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet);
+    Kullanici(String kullaniciAd, LocalDate kayitTarihi, String dogumTarihi, String cinsiyet, String password) {
+        super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet, password);
         //TODO Auto-generated constructor stub
     }
 

@@ -5,9 +5,10 @@ public class Hesap {
     private String kayitTarihi;
     private String dogumTarihi;
     private String cinsiyet;
+    private String password;
     private String bio;
 
-    Hesap(String kullaniciAd, LocalDate kayitTarihi, String dogumTarihi, String cinsiyet) {
+    Hesap(String kullaniciAd, LocalDate kayitTarihi, String dogumTarihi, String cinsiyet, String password) {
 
     }
 

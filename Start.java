@@ -8,7 +8,7 @@ public class Start {
     
     static Scanner input = new Scanner(System.in);
     static Pattern userNamePattern = Pattern.compile("[A-Z]");
-    static Pattern userPasswordPattern = Pattern.compile("");
+    static Pattern userPasswordPattern = Pattern.compile("[A-Z]");//TODO regexi düzelt
     
     public static void main(String[] args) {
         splashScreen();
@@ -61,20 +61,6 @@ public class Start {
     static void signUp() {
         System.out.println("  New Account");
         getUsrName(2);
-        /* 
-        
-                {
-                    LocalDate myObj = LocalDate.now();
-                    BlogSystem.hesapList.add(new Hesap(usrName, myObj, usrbirthDate, usrGender));
-                    System.out.println("Account created succesfully.");
-                    startupScreen();
-                    break;
-                }
-                else {
-                    System.out.println("Choose a stronger password");
-                }
-        */
-        
     }
     
     static void logOut() {
@@ -130,7 +116,7 @@ public class Start {
     }
     
     static void getUsrGender(String usrName, String usrBirthDate) {
-        System.out.println("Enter Gender:");
+        System.out.println("Enter Gender:");//TODO cinsiyete sayı girilmesini engelle
         System.out.print("=>");
         String usrGender = input.next();
         usrGender = usrGender.trim();
@@ -178,12 +164,13 @@ public class Start {
 
     static void createAccount(String usrName, String usrBirthDate, String usrGender, String usrPassword) {
         System.out.println("Account got created succesfully.");
-        //TODO Hesap oluştur
+        LocalDate myObj = LocalDate.now();
+        BlogSystem.hesapList.add(new Hesap(usrName, myObj, usrBirthDate, usrGender, usrPassword));
         startupScreen();
     }
     
     static Hesap checkIfUserExists(String usrName) {
-        for(int i = 0; i < BlogSystem.hesapList.size(); i++) {
+        for(int i = 0; i < BlogSystem.hesapList.size() - 1; i++) {//TODO for u iteratör ile değiştir
             if(BlogSystem.hesapList.get(i).getKullaniciAd().equals(usrName)) {
                 return BlogSystem.hesapList.get(i);
             }
@@ -198,7 +185,7 @@ public class Start {
             return 1;
         }
         else {
-            for(int i = 0; i < BlogSystem.hesapList.size(); i++) {
+            for(int i = 0; i < BlogSystem.hesapList.size() - 1; i++) {//TODO for u iteratör ile değiştir
                 if(BlogSystem.hesapList.get(i).getKullaniciAd().equals(usrName)) {
                     return 2;
                 }
@@ -210,7 +197,7 @@ public class Start {
     
     static int checkPasswordSuffiency(String Password) {
         Matcher matcher = userPasswordPattern.matcher(Password);
-        if(matcher.find()) {
+        if(matcher.find()) {//TODO regex olmazsa birden fazla regex kullanılabilir?
             return 1;
         }
         return 0;
