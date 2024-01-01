@@ -62,12 +62,8 @@ public class Start {
         System.out.println("  New Account");
         getUsrName(2);
         /* 
-        if(checkUserNameAvailablity(usrName) == 0) {
-            while(true) {
-                System.out.println("Enter Password:");
-                System.out.print("=>");
-                String usrPassword = input.next();
-                if(checkPasswordSuffiency(usrPassword) == 0) {
+        
+                {
                     LocalDate myObj = LocalDate.now();
                     BlogSystem.hesapList.add(new Hesap(usrName, myObj, usrbirthDate, usrGender));
                     System.out.println("Account created succesfully.");
@@ -77,15 +73,6 @@ public class Start {
                 else {
                     System.out.println("Choose a stronger password");
                 }
-            }
-            break;
-        }
-        else if(checkUserNameAvailablity(usrName) == 1) {
-            System.out.println("Hata:Kullanici isimlerinde buyuk harf olamaz.");
-        }
-        else {
-            System.out.println("This username is already taken.");
-        }
         */
         
     }
@@ -99,34 +86,101 @@ public class Start {
         System.out.print("=>");
         String usrName = input.next();
         
-        if(usrName.charAt(0) == '0') {
+        if(usrName.charAt(0) == '0') { //Go back
             System.out.println("Returning back to menu.");
             startupScreen();
         }
-        else if(checkUserNameAvailablity(usrName) == 0) {
-            getUsrBirthDate();
+        else if(option == 1) { //Log in
+            if(checkIfUserExists(usrName) != null) {
+                getUsrPassword(checkIfUserExists(usrName));
+            }
+            else {
+                System.out.println("No user found with this name");
+                getUsrName(option);
+            }
         }
-        else if(checkUserNameAvailablity(usrName) == 1) {
-            
+        else if(option == 2) { //Sign up
+            if(checkUserNameAvailablity(usrName) == 0) {
+                getUsrBirthDate(usrName);
+            }
+            else if(checkUserNameAvailablity(usrName) == 1) {
+                System.out.println("Username can not include uppercase letters.");
+                getUsrName(option);
+            }
+            else {
+                System.out.println("An user with this name already exists. Please select something else");
+                getUsrName(option); 
+            }
         }
-        else {
-            
-        }
+        
     }
     
-    static void getUsrBirthDate() {
-        System.out.println("Enter Birth Date:");
+    static void getUsrBirthDate(String usrName) {
+        System.out.println("Enter Birth Date (DD/MM/YYYY):");
         System.out.print("=>");
-        String usrbirthDate = input.next();
-    }
+        String usrbirthDate = input.next();//TODO gerçek bir tarih verilmiş mi diye kontrol et
+        usrbirthDate = usrbirthDate.trim();
 
-    static void getUsrGender() {
+        if(usrbirthDate.charAt(0) == '0') { //Go back
+            System.out.println("Returning back to menu.");
+            startupScreen();
+        }
+
+        getUsrGender(usrName, usrbirthDate);
+    }
+    
+    static void getUsrGender(String usrName, String usrBirthDate) {
         System.out.println("Enter Gender:");
         System.out.print("=>");
         String usrGender = input.next();
+        usrGender = usrGender.trim();
+
+        if(usrGender.charAt(0) == '0') { //Go back
+            System.out.println("Returning back to menu.");
+            startupScreen();
+        }
+
+        getUsrPassword(usrName, usrBirthDate, usrGender);
+    }
+    
+    static void getUsrPassword(Hesap usrAccount) { //Log in
+        System.out.println("Enter Password");
+        System.out.print("=>");
+        String usrPassword = input.next();
+
+        if(usrPassword.charAt(0) == '0') { //Go back
+            System.out.println("Returning back to menu.");
+            startupScreen();
+        }
     }
 
-    static void getUsrPassword(int option) {}
+    static void getUsrPassword(String usrName, String usrBirthDate, String usrGender) { //Sign up
+        System.out.println("Enter Password");
+        System.out.print("=>");
+        String usrPassword= input.next();
+
+        if(usrPassword.charAt(0) == '0') { //Go back
+            System.out.println("Returning back to menu.");
+            startupScreen();
+        }
+        else if(checkPasswordSuffiency(usrPassword) == 1) {
+            createAccount(usrName, usrBirthDate, usrGender, usrPassword);
+        }
+        else {
+            System.out.println("Password should include;");
+            System.out.println(" - At least 1 capital letter");
+            System.out.println(" - At least 1 lowercase letter");
+            System.out.println(" - At least 1 number");
+            getUsrPassword(usrName, usrBirthDate, usrGender);
+        }
+
+    }
+
+    static void createAccount(String usrName, String usrBirthDate, String usrGender, String usrPassword) {
+        System.out.println("Account got created succesfully.");
+        //TODO Hesap oluştur
+        startupScreen();
+    }
     
     static Hesap checkIfUserExists(String usrName) {
         for(int i = 0; i < BlogSystem.hesapList.size(); i++) {
@@ -154,8 +208,11 @@ public class Start {
         }
     }
     
-    
     static int checkPasswordSuffiency(String Password) {
+        Matcher matcher = userPasswordPattern.matcher(Password);
+        if(matcher.find()) {
+            return 1;
+        }
         return 0;
     }
     
