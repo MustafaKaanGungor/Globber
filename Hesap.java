@@ -44,6 +44,14 @@ public class Hesap {
         this.cinsiyet = cinsiyet;
     }
 
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getBio() {
         return bio;
     }
