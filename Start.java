@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.text.StyledEditorKit.ItalicAction;
+
 import java.util.Iterator;
 
 import java.time.LocalDate;
@@ -169,6 +171,9 @@ public class Start {
         System.out.println("Account got created succesfully.");
         LocalDate myObj = LocalDate.now();
         BlogSystem.hesapList.add(new Hesap(usrName, myObj, usrBirthDate, usrGender, usrPassword));
+
+        printList();
+
         startupScreen();//!error
     }
     
@@ -176,21 +181,10 @@ public class Start {
         Iterator<Hesap> iterator = BlogSystem.hesapList.iterator();
         
         while(iterator.hasNext()) {
-            String ad = iterator.next().getKullaniciAd();
-            if(ad.equals(usrName)) { //! Error veriyor
+            if(iterator.next().getKullaniciAd().equals(usrName)) { //! Error veriyor
                 return iterator.next();
             }
         }
-        
-        
-        /*
-        
-        for(int i = 0; i < BlogSystem.hesapList.size() - 1; i++) {//TODO for u iteratör ile değiştir
-            if(BlogSystem.hesapList.get(i).getKullaniciAd().equals(usrName)) {
-                return BlogSystem.hesapList.get(i);
-            }
-        }*/
-        
         return null;
     }
     
@@ -208,14 +202,6 @@ public class Start {
                     return 2;
                 }
             }
-            
-            /*
-            for(int i = 0; i < BlogSystem.hesapList.size() - 1; i++) {//TODO for u iteratör ile değiştir
-                if(BlogSystem.hesapList.get(i).getKullaniciAd().equals(usrName)) {
-                    return 2;
-                }
-            }*/
-            
             return 0;
         }
     }
@@ -235,5 +221,12 @@ public class Start {
         System.out.println("");
         //TODO: Github readmesini oluşturunca buraya ekle
         startupScreen();
+    }
+
+    static void printList() {
+        Iterator<Hesap> iterator = BlogSystem.hesapList.iterator();
+        while(iterator.hasNext()) {
+            System.out.println(iterator.next().getKullaniciAd());
+        }
     }
 }

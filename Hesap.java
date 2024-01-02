@@ -9,7 +9,10 @@ public class Hesap {
     private String bio;
 
     Hesap(String kullaniciAd, LocalDate kayitTarihi, String dogumTarihi, String cinsiyet, String password) {
-
+        this.kullaniciAd = kullaniciAd;
+        this.dogumTarihi = dogumTarihi;
+        this.cinsiyet = cinsiyet;
+        this.password = password;
     }
 
     public String getKullaniciAd() {
