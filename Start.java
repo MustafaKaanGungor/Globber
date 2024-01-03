@@ -1,11 +1,7 @@
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.swing.text.StyledEditorKit.ItalicAction;
-
 import java.util.Iterator;
-
 import java.time.LocalDate;
 
 public class Start {
@@ -18,7 +14,7 @@ public class Start {
     public static void main(String[] args) {
         splashScreen();
         loadData();
-        startupScreen(); //!error
+        startupScreen();
     }
     
     static void splashScreen() {
@@ -42,10 +38,10 @@ public class Start {
         
         switch (logOption) {
             case 1:
-            logIn(); //!error
+            logIn();
             break;
             case 2:
-            signUp(); //!error
+            signUp();
             break;
             case 3:
             info();
@@ -60,12 +56,12 @@ public class Start {
     
     static void logIn() {
         System.out.println("  Log in");
-        getUsrName(1); //!error
+        getUsrName(1);
     }
     
     static void signUp() {
         System.out.println("  New Account");
-        getUsrName(2); //!error
+        getUsrName(2);
     }
     
     static void logOut() {
@@ -82,7 +78,7 @@ public class Start {
             startupScreen();
         }
         else if(option == 1) { //Log in
-            if(checkIfUserExists(usrName) != null) { //! Error veriyor
+            if(checkIfUserExists(usrName) != null) {
                 getUsrPassword(checkIfUserExists(usrName));
             }
             else {
@@ -92,7 +88,7 @@ public class Start {
         }
         else if(option == 2) { //Sign up
             if(checkUserNameAvailablity(usrName) == 0) {
-                getUsrBirthDate(usrName); //!error
+                getUsrBirthDate(usrName);
             }
             else if(checkUserNameAvailablity(usrName) == 1) {
                 System.out.println("Username can not include uppercase letters.");
@@ -117,7 +113,7 @@ public class Start {
             startupScreen();
         }
         
-        getUsrGender(usrName, usrbirthDate); //!error
+        getUsrGender(usrName, usrbirthDate);
     }
     
     static void getUsrGender(String usrName, String usrBirthDate) {
@@ -131,7 +127,7 @@ public class Start {
             startupScreen();
         }
         
-        getUsrPassword(usrName, usrBirthDate, usrGender);//!erorr
+        getUsrPassword(usrName, usrBirthDate, usrGender);
     }
     
     static void getUsrPassword(Hesap usrAccount) { //Log in
@@ -155,7 +151,7 @@ public class Start {
             startupScreen();
         }
         else if(checkPasswordSuffiency(usrPassword) == 1) {
-            createAccount(usrName, usrBirthDate, usrGender, usrPassword);//!error
+            createAccount(usrName, usrBirthDate, usrGender, usrPassword);
         }
         else {
             System.out.println("Password should include;");
@@ -174,16 +170,17 @@ public class Start {
 
         printList();
 
-        startupScreen();//!error
+        startupScreen();
     }
     
     static Hesap checkIfUserExists(String usrName) {
         Iterator<Hesap> iterator = BlogSystem.hesapList.iterator();
         
         while(iterator.hasNext()) {
-            if(iterator.next().getKullaniciAd().equals(usrName)) { //! Error veriyor
+            
+            /*if(iterator.next().getKullaniciAd().equals(usrName)) {
                 return iterator.next();
-            }
+            }*/
         }
         return null;
     }
