@@ -6,7 +6,7 @@ public class BlogSystem {
     static ArrayList<BlogYazisi> blogList = new ArrayList<BlogYazisi>(); //tüm blog postları
     
     static void startBlogger(Hesap session) {
-
+        System.out.println("Glooooobber");
     }
     
     //oturum açma ve kapama methodları,

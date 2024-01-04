@@ -2,14 +2,14 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Iterator;
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class Start {
-    static private Hesap session = null;
-    
     static Scanner input = new Scanner(System.in);
     static Pattern userNamePattern = Pattern.compile("[A-Z]");
-    static Pattern userPasswordPattern = Pattern.compile("[A-Z]");//TODO regexi düzelt
+    static Pattern userPasswordLetterPattern = Pattern.compile("[A-Z]");//TODO regexi daha iyi hale getir
+    static Pattern userPasswordNumberPattern = Pattern.compile("[0-9]");
     
     public static void main(String[] args) {
         splashScreen();
@@ -50,8 +50,6 @@ public class Start {
             System.out.println("Please select one of the given options");
             break;
         }
-        
-        BlogSystem.startBlogger(session);
     }
     
     static void logIn() {
@@ -139,6 +137,15 @@ public class Start {
             System.out.println("Returning back to menu.");
             startupScreen();
         }
+        else if(checkPassword(usrAccount, usrPassword) == 1) {
+            System.out.println("Login succesfull. Directing to Globber.");
+            BlogSystem.startBlogger(usrAccount);
+        }
+        else {
+            System.out.println("Password is incorrect try again.");
+            getUsrPassword(usrAccount);
+        }
+        
     }
     
     static void getUsrPassword(String usrName, String usrBirthDate, String usrGender) { //Sign up
@@ -154,7 +161,7 @@ public class Start {
             createAccount(usrName, usrBirthDate, usrGender, usrPassword);
         }
         else {
-            System.out.println("Password should include;");
+            System.out.println("Password should be at least 8 characters and should include;");
             System.out.println(" - At least 1 capital letter");
             System.out.println(" - At least 1 lowercase letter");
             System.out.println(" - At least 1 number");
@@ -167,9 +174,7 @@ public class Start {
         System.out.println("Account got created succesfully.");
         LocalDate myObj = LocalDate.now();
         BlogSystem.hesapList.add(new Hesap(usrName, myObj, usrBirthDate, usrGender, usrPassword));
-
-        printList();
-
+        
         startupScreen();
     }
     
@@ -177,12 +182,19 @@ public class Start {
         Iterator<Hesap> iterator = BlogSystem.hesapList.iterator();
         
         while(iterator.hasNext()) {
-            
-            /*if(iterator.next().getKullaniciAd().equals(usrName)) {
-                return iterator.next();
-            }*/
+            Hesap finderHesap = iterator.next();
+            if(finderHesap.getKullaniciAd().equals(usrName)) {
+                return finderHesap;
+            }
         }
         return null;
+    }
+    
+    static int checkPassword(Hesap usr, String password) {
+        if(usr.getPassword().equals(password)) {
+            return 1;
+        }
+        return 0;
     }
     
     static int checkUserNameAvailablity(String usrName) {
@@ -204,8 +216,9 @@ public class Start {
     }
     
     static int checkPasswordSuffiency(String Password) {
-        Matcher matcher = userPasswordPattern.matcher(Password);
-        if(matcher.find()) {//TODO regex olmazsa birden fazla regex kullanılabilir?
+        Matcher letterMatcher = userPasswordLetterPattern.matcher(Password);
+        Matcher numberMatcher = userPasswordNumberPattern.matcher(Password);
+        if(letterMatcher.find() && numberMatcher.find() && Password.length() > 8) {//TODO regex olmazsa birden fazla regex kullanılabilir?
             return 1;
         }
         return 0;
@@ -218,12 +231,5 @@ public class Start {
         System.out.println("");
         //TODO: Github readmesini oluşturunca buraya ekle
         startupScreen();
-    }
-
-    static void printList() {
-        Iterator<Hesap> iterator = BlogSystem.hesapList.iterator();
-        while(iterator.hasNext()) {
-            System.out.println(iterator.next().getKullaniciAd());
-        }
     }
 }
