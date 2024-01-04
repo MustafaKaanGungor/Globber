@@ -137,9 +137,9 @@ public class Start {
             System.out.println("Returning back to menu.");
             startupScreen();
         }
-        else if(usrbirthDate.charAt(2) == '/' && usrbirthDate.charAt(5) == '/') {
-            System.out.println("Please enter date in DD/MM/YYYY format.");
-        } //TODO üşenmezsen verilen tarihin sayılarını kontrol et
+        //else if(usrbirthDate.charAt(2) == '/' && usrbirthDate.charAt(5) == '/') {
+       //     System.out.println("Please enter date in DD/MM/YYYY format.");
+       // } //TODO üşenmezsen verilen tarihin sayılarını kontrol et
         else {
             getUsrGender(usrName, usrbirthDate);
         }
