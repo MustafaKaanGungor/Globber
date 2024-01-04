@@ -10,6 +10,7 @@ public class Start {
     static Scanner input = new Scanner(System.in);
 
     static Pattern userNamePattern = Pattern.compile("[A-Z]");
+    static Pattern userGenderPatten = Pattern.compile("[0-9]");//TODO eger regexi beceremezsen sayı ve harf regexi olarak birleştir
     static Pattern userPasswordLetterPattern = Pattern.compile("[A-Z]");//TODO regexi daha iyi hale getir
     static Pattern userPasswordNumberPattern = Pattern.compile("[0-9]");
     
@@ -84,7 +85,7 @@ public class Start {
     }
     
     static void signUp() {
-        System.out.println("  New Account"); //TODO şuan direk Hesap sınıfından hesap açıyor. Yazar ve kullanıcı olarak hesap açma eklenmeli
+        System.out.println("  New Account");
         getUsrName(2);
     }
     
@@ -129,29 +130,37 @@ public class Start {
     static void getUsrBirthDate(String usrName) {
         System.out.println("Enter Birth Date (DD/MM/YYYY):");
         System.out.print("=>");
-        String usrbirthDate = input.next();//TODO gerçek bir tarih verilmiş mi diye kontrol et
+        String usrbirthDate = input.next();
         usrbirthDate = usrbirthDate.trim();
         
         if(usrbirthDate.charAt(0) == '0') { //Go back
             System.out.println("Returning back to menu.");
             startupScreen();
         }
-        
-        getUsrGender(usrName, usrbirthDate);
+        else if(usrbirthDate.charAt(2) == '/' && usrbirthDate.charAt(5) == '/') {
+            System.out.println("Please enter date in DD/MM/YYYY format.");
+        } //TODO üşenmezsen verilen tarihin sayılarını kontrol et
+        else {
+            getUsrGender(usrName, usrbirthDate);
+        }
     }
     
     static void getUsrGender(String usrName, String usrBirthDate) {
-        System.out.println("Enter Gender:");//TODO cinsiyete sayı girilmesini engelle
+        System.out.println("Enter Gender:");
         System.out.print("=>");
         String usrGender = input.next();
         usrGender = usrGender.trim();
-        
+        Matcher matcher = userGenderPatten.matcher(usrGender);
         if(usrGender.charAt(0) == '0') { //Go back
             System.out.println("Returning back to menu.");
             startupScreen();
         }
-        
-        getUsrPassword(usrName, usrBirthDate, usrGender);
+        else if (matcher.find()) {
+            System.out.println("Please enter a valid gender");
+        }
+        else {
+            getUsrPassword(usrName, usrBirthDate, usrGender);
+        }
     }
     
     static void getUsrPassword(Hesap usrAccount) { //Log in
@@ -253,7 +262,7 @@ public class Start {
     static int checkPasswordSuffiency(String Password) {
         Matcher letterMatcher = userPasswordLetterPattern.matcher(Password);
         Matcher numberMatcher = userPasswordNumberPattern.matcher(Password);
-        if(letterMatcher.find() && numberMatcher.find() && Password.length() > 8) {//TODO regex olmazsa birden fazla regex kullanılabilir?
+        if(letterMatcher.find() && numberMatcher.find() && Password.length() > 8) {
             return 1;
         }
         return 0;
