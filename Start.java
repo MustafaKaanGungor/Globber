@@ -2,11 +2,13 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Iterator;
-import java.io.IOException;
 import java.time.LocalDate;
 
 public class Start {
+    static int globberPreset;
+
     static Scanner input = new Scanner(System.in);
+
     static Pattern userNamePattern = Pattern.compile("[A-Z]");
     static Pattern userPasswordLetterPattern = Pattern.compile("[A-Z]");//TODO regexi daha iyi hale getir
     static Pattern userPasswordNumberPattern = Pattern.compile("[0-9]");
@@ -14,7 +16,7 @@ public class Start {
     public static void main(String[] args) {
         splashScreen();
         loadData();
-        startupScreen();
+        globberTypeSelect();
     }
     
     static void splashScreen() {
@@ -30,6 +32,30 @@ public class Start {
         System.out.println("Data is loading");
         DataManager.loadData();
         System.out.println("Done");
+    }
+
+    static void globberTypeSelect() {
+        System.out.println("1- Globber    2- Globber for Writers    3- Globber Admin Login");
+        int logOption = input.nextInt();
+
+        switch (logOption) {
+            case 1:
+                globberPreset = 1;
+                startupScreen();
+                break;
+            case 2:
+                globberPreset = 2;
+                startupScreen();
+                break;
+            case 3:
+                globberPreset = 3;
+                getUsrName(1);
+                break;
+            default:
+                System.out.println("Please select one of the given options");
+                break;
+
+        }
     }
     
     static void startupScreen() {
@@ -58,7 +84,7 @@ public class Start {
     }
     
     static void signUp() {
-        System.out.println("  New Account");
+        System.out.println("  New Account"); //TODO şuan direk Hesap sınıfından hesap açıyor. Yazar ve kullanıcı olarak hesap açma eklenmeli
         getUsrName(2);
     }
     
@@ -139,7 +165,7 @@ public class Start {
         }
         else if(checkPassword(usrAccount, usrPassword) == 1) {
             System.out.println("Login succesfull. Directing to Globber.");
-            BlogSystem.startBlogger(usrAccount);
+            BlogSystem.startBlogger(usrAccount, globberPreset);
         }
         else {
             System.out.println("Password is incorrect try again.");
@@ -173,7 +199,16 @@ public class Start {
     static void createAccount(String usrName, String usrBirthDate, String usrGender, String usrPassword) {
         System.out.println("Account got created succesfully.");
         LocalDate myObj = LocalDate.now();
-        BlogSystem.hesapList.add(new Hesap(usrName, myObj, usrBirthDate, usrGender, usrPassword));
+        switch (globberPreset) {
+            case 1:
+            BlogSystem.hesapList.add(new Kullanici(usrName, myObj, usrBirthDate, usrGender, usrPassword));
+            break;
+            case 2:
+            BlogSystem.hesapList.add(new Yazar(usrName, myObj, usrBirthDate, usrGender, usrPassword));
+            break;
+            default:
+            break;
+        }
         
         startupScreen();
     }
