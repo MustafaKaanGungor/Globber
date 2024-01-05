@@ -2,8 +2,13 @@ import java.io.File;
 
 public class DataManager {
     
-    File dosya = new File("Data/Hello.txt");
+    static File dosya = new File("data/Hello.txt");
     public static void loadData() {
-        
+        if(dosya.canRead()) {
+            System.out.println("okunabiliyor");
+        }
+        else {
+            System.out.println("okunmuyor :(");
+        }
     }
 }
