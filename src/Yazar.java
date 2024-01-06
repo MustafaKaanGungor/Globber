@@ -6,9 +6,11 @@ public class Yazar extends Hesap implements YazarIslem, KullaniciIslem{
         super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet, password);
         //TODO Auto-generated constructor stub
     }
+    
     ArrayList<BlogYazisi> yazilanBloglar = new ArrayList<BlogYazisi>();
     int yazilanBlogSayisi;
     ArrayList<Kullanici> takipciler = new ArrayList<Kullanici>();
+
     @Override
     public void yazarTakipEt() {
         // TODO Auto-generated method stub

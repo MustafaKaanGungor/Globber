@@ -23,20 +23,44 @@ public class DataManager {
                 switch(reader.next()) {
                     case "Hesap":
                     accountType = reader.nextInt();
+                    if(!reader.next().equals("ISM")) {
+                        break;
+                    }
                     case "ISM":
                     usrName = reader.next();
+                    if(!reader.next().equals("KAT")) {
+                        break;
+                    }
                     case "KAT":
                     signDate = reader.next();
+                    if(!reader.next().equals("DOT")) {
+                        break;
+                    }
                     case "DOT":
                     birthDate = reader.next();
+                    if(!reader.next().equals("CIN")) {
+                        break;
+                    }
                     case "CIN":
                     usrGender = reader.next();
+                    if(!reader.next().equals("PAW")) {
+                        break;
+                    }
                     case "PAW":
                     usrPassword = reader.next();
+                    if(!reader.next().equals("BIO")) {
+                        break;
+                    }
                     case "BIO":
                     usrBio = reader.nextLine();
+
+                    if(accountType == 1) {
+
+                    }
+                    else if(accountType == 2) {
+
+                    }
                     case "BOSLUK-":
-                    break;
                     default:
                 }
 
@@ -47,6 +71,8 @@ public class DataManager {
                 System.out.println(usrGender);
                 System.out.println(usrPassword);
                 System.out.println(usrBio);
+
+                //TODO her kişi okumasından sonra değerleri sıfırla
             }
             
             
