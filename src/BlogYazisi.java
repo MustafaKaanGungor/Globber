@@ -9,7 +9,7 @@ public class BlogYazisi {
     String yayinTarihi;
     Tag tag; //Sadece 1 tag eklemeye izin var
     int begeniSayisi;
-    ArrayList<Yorum> yorumlar = new ArrayList<Yorum>();
+    ArrayList<Integer> yorumlar = new ArrayList<Integer>();
     int yorumSayisi; //yorum sayısını ya her yorum eklendiğinde ve silindiğinde arttırıp azaltıcaz ya da 
     //süreki yorum sayısını yorumlar.size() a eşitleyen bi kod yazıcaz.
     int goruntulenmeSayisi;
