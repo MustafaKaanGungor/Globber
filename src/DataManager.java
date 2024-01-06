@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DataManager {
@@ -96,21 +97,37 @@ public class DataManager {
                     case "BOSLUK-":
                     default:
                 }
+                
+                ArrayList<String> usrFollowedWriters = new ArrayList<String>();
+                ArrayList<Integer> usrComment = new ArrayList<Integer>();
+                ArrayList<Tag> usrFollowedTags = new ArrayList<Tag> ();
+                ArrayList<Integer> usrHistoryList = new ArrayList<Integer>();
 
                 usrComments.trim();
-                usrComments.split("[0-9]");
-                /*for(int i = 0; i < usrComments.length(); i++) {
-                    for(int ii = 0; ii < 5; ii++) {
-                        String sumOfChars = "";
-                        sumOfChars += usrComments.charAt(ii);
+                for(String comment:usrComments.split("[a-zA-Z_0-9]")) {
+                    Integer commentID = Integer.parseInt(comment);
+                    usrComment.add(commentID);
+                }
+                
+                usrFollowWriter.trim();
+                for(String writer:usrFollowWriter.split("[a-zA-Z_0-9]")) {
+                    usrFollowedWriters.add(writer);
+                }
 
+                usrFollowTag.trim();
+                for(String tagString: usrFollowTag.split("[a-zA-Z_0-9]")) {
+                    usrFollowedTags.add(Tag.valueOf(tagString));
+                }
 
-                    }
-
-                }*/
-
+                usrHistory.trim();
+                for(String history:usrHistory.split("[a-zA-Z_0-9]")) {
+                    Integer blogID = Integer.parseInt(history);
+                    usrHistoryList.add(blogID);
+                }
+                
                 if(accountType == 1) {
-                    BlogSystem.hesapList.add(new Kullanici(usrBio, signDate, followers, birthDate, usrPassword));
+                    BlogSystem.hesapList.add(new Kullanici(usrBio, signDate, followers, birthDate, usrPassword,
+                     usrComment, usrFollowedWriters,usrFollowedTags,usrHistoryList));
                 }
                 else if(accountType == 2) {
                     BlogSystem.hesapList.add(new Yazar(usrBio, signDate, followers, birthDate, usrPassword));
