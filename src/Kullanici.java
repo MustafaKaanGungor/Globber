@@ -7,11 +7,11 @@ public class Kullanici extends Hesap implements KullaniciIslem{
         //TODO Auto-generated constructor stub
     }
 
-    ArrayList<Yorum> yorumlarList = new ArrayList<Yorum>();
-    ArrayList<Yazar> takipEdilenYazarlar = new ArrayList<Yazar>();
+    ArrayList<Integer> yorumlarList = new ArrayList<Integer>();
+    ArrayList<String> takipEdilenYazarlar = new ArrayList<String>();
     ArrayList<Tag> takipEdilenTagler = new ArrayList<Tag>();
 
-    ArrayList<BlogYazisi> okumaGecmisi = new ArrayList<BlogYazisi>();
+    ArrayList<Integer> okumaGecmisi = new ArrayList<Integer>();
 
     @Override
     public void yazarTakipEt() {

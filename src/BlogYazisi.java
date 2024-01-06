@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 public class BlogYazisi {
+
+    Integer ID;
     String baslik;
     String icerik;
     //TODO: Kapak fotosu değişkeni ekle
