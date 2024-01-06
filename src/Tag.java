@@ -7,5 +7,4 @@ public enum Tag {
     Sinema,
     Edebiyat,
     Ogrencilik
-    //ileride daha fazla tag ekleyebiliriz -Mustafa
 }

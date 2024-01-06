@@ -5,7 +5,6 @@ public class BlogYazisi {
     Integer ID;
     String baslik;
     String icerik;
-    //TODO: Kapak fotosu değişkeni ekle
     String yayinTarihi;
     Tag tag; //Sadece 1 tag eklemeye izin var
     int begeniSayisi;

@@ -21,6 +21,8 @@ public class Kullanici extends Hesap implements KullaniciIslem{
 
     ArrayList<Integer> okumaGecmisi = new ArrayList<Integer>();
 
+    Tag degisken = Tag.Edebiyat;
+
     @Override
     public void yazarTakipEt() {
         // TODO Auto-generated method stub

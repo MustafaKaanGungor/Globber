@@ -1,8 +1,10 @@
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
-import java.time.LocalDate;
 
 public class Start {
     static int globberPreset;
@@ -10,7 +12,7 @@ public class Start {
     static Scanner input = new Scanner(System.in);
 
     static Pattern userNamePattern = Pattern.compile("[A-Z]");
-    static Pattern userGenderPatten = Pattern.compile("[0-9]");//TODO eger regexi beceremezsen sayı ve harf regexi olarak birleştir
+    static Pattern userGenderPatten = Pattern.compile("[0-9]");
     static Pattern userPasswordLetterPattern = Pattern.compile("[A-Z]");//TODO regexi daha iyi hale getir
     static Pattern userPasswordNumberPattern = Pattern.compile("[0-9]");
     
@@ -60,10 +62,13 @@ public class Start {
     }
     
     static void startupScreen() {
-        System.out.println("1- Log in    2- Sign up    3- More About Globber");
+        System.out.println("1- Log in    2- Sign up    3- More About Globber    0- Back");
         int logOption = input.nextInt();
         
         switch (logOption) {
+            case 0:
+            globberTypeSelect();
+            break;
             case 1:
             logIn();
             break;
@@ -94,12 +99,12 @@ public class Start {
     }
     
     static void getUsrName(int option) {
-        System.out.println("Enter Username");
+        System.out.println("Enter Username  (0- Back)");
         System.out.print("=>");
         String usrName = input.next();
         
         if(usrName.charAt(0) == '0') { //Go back
-            System.out.println("Returning back to menu.");
+            System.out.println("Returning back to menu."); //Adminden geri çıkış için seçenek ekle
             startupScreen();
         }
         else if(option == 1) { //Log in
@@ -128,7 +133,7 @@ public class Start {
     }
     
     static void getUsrBirthDate(String usrName) {
-        System.out.println("Enter Birth Date (DD/MM/YYYY):");
+        System.out.println("Enter Birth Date (DD/MM/YYYY):  (0- Back)");
         System.out.print("=>");
         String usrbirthDate = input.next();
         usrbirthDate = usrbirthDate.trim();
@@ -138,7 +143,7 @@ public class Start {
             startupScreen();
         }
         //else if(usrbirthDate.charAt(2) == '/' && usrbirthDate.charAt(5) == '/') {
-       //     System.out.println("Please enter date in DD/MM/YYYY format.");
+       //     System.out.println("Please enter date in DD/MM/YYYY format."); //TODO bu kod çalışmıyor
        // } //TODO üşenmezsen verilen tarihin sayılarını kontrol et
         else {
             getUsrGender(usrName, usrbirthDate);
@@ -146,7 +151,7 @@ public class Start {
     }
     
     static void getUsrGender(String usrName, String usrBirthDate) {
-        System.out.println("Enter Gender:");
+        System.out.println("Enter Gender:  (0- Back)");
         System.out.print("=>");
         String usrGender = input.next();
         usrGender = usrGender.trim();
@@ -157,6 +162,7 @@ public class Start {
         }
         else if (matcher.find()) {
             System.out.println("Please enter a valid gender");
+            getUsrGender(usrName, usrBirthDate);;
         }
         else {
             getUsrPassword(usrName, usrBirthDate, usrGender);
@@ -164,7 +170,7 @@ public class Start {
     }
     
     static void getUsrPassword(Hesap usrAccount) { //Log in
-        System.out.println("Enter Password");
+        System.out.println("Enter Password  (0- Back)");
         System.out.print("=>");
         String usrPassword = input.next();
         
@@ -184,7 +190,7 @@ public class Start {
     }
     
     static void getUsrPassword(String usrName, String usrBirthDate, String usrGender) { //Sign up
-        System.out.println("Enter Password");
+        System.out.println("Enter Password  (0- Back)");
         System.out.print("=>");
         String usrPassword= input.next();
         
@@ -207,13 +213,14 @@ public class Start {
     
     static void createAccount(String usrName, String usrBirthDate, String usrGender, String usrPassword) {
         System.out.println("Account got created succesfully.");
-        LocalDate myObj = LocalDate.now(); //TODO local date i string ile değiştir
+        DateFormat currentDate = new SimpleDateFormat();
+        String signDate = currentDate.format(new Date());
         switch (globberPreset) {
             case 1:
-            BlogSystem.hesapList.add(new Kullanici(usrName, myObj, usrBirthDate, usrGender, usrPassword));
+            BlogSystem.hesapList.add(new Kullanici(usrName, signDate, usrBirthDate, usrGender, usrPassword));
             break;
             case 2:
-            BlogSystem.hesapList.add(new Yazar(usrName, myObj, usrBirthDate, usrGender, usrPassword));
+            BlogSystem.hesapList.add(new Yazar(usrName, signDate, usrBirthDate, usrGender, usrPassword));
             break;
             default:
             break;

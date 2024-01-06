@@ -97,6 +97,18 @@ public class DataManager {
                     default:
                 }
 
+                usrComments.trim();
+                usrComments.split("[0-9]");
+                /*for(int i = 0; i < usrComments.length(); i++) {
+                    for(int ii = 0; ii < 5; ii++) {
+                        String sumOfChars = "";
+                        sumOfChars += usrComments.charAt(ii);
+
+
+                    }
+
+                }*/
+
                 if(accountType == 1) {
                     BlogSystem.hesapList.add(new Kullanici(usrBio, signDate, followers, birthDate, usrPassword));
                 }

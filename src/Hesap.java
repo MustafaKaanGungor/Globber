@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 public class Hesap {
     private String kullaniciAd;
     private String kayitTarihi;
