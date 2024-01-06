@@ -8,8 +8,9 @@ public class Hesap {
     private String password;
     private String bio;
 
-    Hesap(String kullaniciAd, LocalDate kayitTarihi, String dogumTarihi, String cinsiyet, String password) {
+    Hesap(String kullaniciAd, String kayitTarihi, String dogumTarihi, String cinsiyet, String password) {
         this.kullaniciAd = kullaniciAd;
+        this.kayitTarihi = kayitTarihi;
         this.dogumTarihi = dogumTarihi;
         this.cinsiyet = cinsiyet;
         this.password = password;

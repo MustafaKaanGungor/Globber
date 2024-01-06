@@ -1,10 +1,18 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Kullanici extends Hesap implements KullaniciIslem{
-    Kullanici(String kullaniciAd, LocalDate kayitTarihi, String dogumTarihi, String cinsiyet, String password) {
+    Kullanici(String kullaniciAd, String kayitTarihi, String dogumTarihi, String cinsiyet, String password) {
         super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet, password);
-        //TODO Auto-generated constructor stub
+    }
+
+    Kullanici(String kullaniciAd, String kayitTarihi, String dogumTarihi, String cinsiyet, String password,
+        ArrayList<Integer> comments, ArrayList<String> followedWriters, ArrayList<Tag> tags, ArrayList<Integer> history) {
+        super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet, password);
+
+        this.yorumlarList = (ArrayList<Integer>)comments.clone();
+        this.takipEdilenYazarlar = (ArrayList<String>)followedWriters.clone();
+        this.takipEdilenTagler = (ArrayList<Tag>)tags.clone();
+        this.okumaGecmisi = (ArrayList<Integer>)history.clone();
     }
 
     ArrayList<Integer> yorumlarList = new ArrayList<Integer>();

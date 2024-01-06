@@ -5,12 +5,19 @@ import java.util.Scanner;
 public class DataManager {
     
     static int accountType = 0;
-    static String usrName;
-    static String signDate;
-    static String birthDate;
-    static String usrGender;
-    static String usrPassword;
-    static String usrBio;
+    static String usrName = " ";
+    static String signDate = " ";
+    static String birthDate = " ";
+    static String usrGender = " ";
+    static String usrPassword = " ";
+    static String usrBio = " ";
+    static String usrComments = " ";
+    static String usrFollowWriter = " ";
+    static String usrFollowTag = " ";
+    static String usrHistory = " ";
+    static String writtenBlogs = " ";
+    static String followers = " ";
+    
     
     static File dosya = new File("data/Hello.txt");
     public static void loadData() {
@@ -53,26 +60,66 @@ public class DataManager {
                     }
                     case "BIO":
                     usrBio = reader.nextLine();
-
+                    
                     if(accountType == 1) {
-
+                        switch(reader.next()) {
+                            case "YRM":
+                            usrComments = reader.nextLine();
+                            if(!reader.next().equals("YZR")) {
+                                break;
+                            }
+                            case "YZR":
+                            usrFollowWriter = reader.nextLine();
+                            if(!reader.next().equals("TAG")) {
+                                break;
+                            }
+                            case "TAG":
+                            usrFollowTag = reader.nextLine();
+                            if(!reader.next().equals("HST")) {
+                                break;
+                            }
+                            case "HST":
+                            usrHistory = reader.nextLine();
+                        }
                     }
                     else if(accountType == 2) {
-
+                        switch(reader.next()) {
+                            case "WRB":
+                            writtenBlogs = reader.nextLine();
+                            if(!reader.next().equals("TKP")) {
+                                break;
+                            }
+                            case "TKP":
+                            followers = reader.nextLine();
+                        }
                     }
                     case "BOSLUK-":
                     default:
                 }
 
-                System.out.println(accountType);
-                System.out.println(usrName);
-                System.out.println(signDate);
-                System.out.println(birthDate);
-                System.out.println(usrGender);
-                System.out.println(usrPassword);
-                System.out.println(usrBio);
-
-                //TODO her kişi okumasından sonra değerleri sıfırla
+                if(accountType == 1) {
+                    BlogSystem.hesapList.add(new Kullanici(usrBio, signDate, followers, birthDate, usrPassword));
+                }
+                else if(accountType == 2) {
+                    BlogSystem.hesapList.add(new Yazar(usrBio, signDate, followers, birthDate, usrPassword));
+                }
+                else if(accountType == 3) {
+                    BlogSystem.hesapList.add(new Admin(usrName, signDate, birthDate, usrGender, usrPassword));
+                }
+                
+                accountType = 0;
+                usrName = " ";
+                signDate = " ";
+                birthDate = " ";
+                usrGender = " ";
+                usrPassword = " ";
+                usrBio = " ";
+                usrComments = " ";
+                usrFollowWriter = " ";
+                usrFollowTag = " ";
+                usrHistory = " ";
+                writtenBlogs = " ";
+                followers = " ";
             }
             
             

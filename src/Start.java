@@ -207,7 +207,7 @@ public class Start {
     
     static void createAccount(String usrName, String usrBirthDate, String usrGender, String usrPassword) {
         System.out.println("Account got created succesfully.");
-        LocalDate myObj = LocalDate.now();
+        LocalDate myObj = LocalDate.now(); //TODO local date i string ile değiştir
         switch (globberPreset) {
             case 1:
             BlogSystem.hesapList.add(new Kullanici(usrName, myObj, usrBirthDate, usrGender, usrPassword));

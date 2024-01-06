@@ -1,16 +1,20 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Yazar extends Hesap implements YazarIslem, KullaniciIslem{
-    Yazar(String kullaniciAd, LocalDate kayitTarihi, String dogumTarihi, String cinsiyet, String password) {
+    Yazar(String kullaniciAd, String kayitTarihi, String dogumTarihi, String cinsiyet, String password) {
         super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet, password);
-        //TODO Auto-generated constructor stub
     }
-
+    
+    Yazar(String kullaniciAd, String kayitTarihi, String dogumTarihi, String cinsiyet, String password, ArrayList<Integer> blogs, ArrayList<String> followers) {
+        super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet, password);
+        this.yazilanBloglar = (ArrayList<Integer>)blogs.clone();
+        this.takipciler = (ArrayList<String>)followers.clone(); //TODO buradaki uyarının nedenini araştır
+    }
+    
+    
     ArrayList<Integer> yazilanBloglar = new ArrayList<Integer>();
-    int yazilanBlogSayisi;
     ArrayList<String> takipciler = new ArrayList<String>();
-
+    
     @Override
     public void yazarTakipEt() {
         // TODO Auto-generated method stub
