@@ -38,7 +38,7 @@ public class Start {
     }
     
     static void globberTypeSelect() {
-        System.out.println("1- Globber    2- Globber for Writers    3- Globber Admin Login");
+        System.out.println("1- Globber    2- Globber for Writers");
         int logOption = input.nextInt();
         
         switch (logOption) {
@@ -49,10 +49,6 @@ public class Start {
             case 2:
             globberPreset = 2;
             startupScreen();
-            break;
-            case 3:
-            globberPreset = 3;
-            getUsrName(1);
             break;
             default:
             System.out.println("Please select one of the given options");

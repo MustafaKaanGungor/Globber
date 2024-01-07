@@ -174,9 +174,6 @@ public class DataManager {
                     BlogSystem.hesapList.add(new Yazar(usrName, signDate, birthDate, usrGender, usrPassword, usrBio,
                     writtenBlogList, followersList));
                 }
-                else if(accountType == 3) {
-                    BlogSystem.hesapList.add(new Admin(usrName, signDate, birthDate, usrGender, usrPassword));
-                }
                 
                 accountType = 0;
                 usrName = "";

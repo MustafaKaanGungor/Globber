@@ -115,7 +115,7 @@ public class BlogSystem {
             }
             System.out.println("Type the blog you want to read");
             int read = input.nextInt();
-                blogOku(read);
+                blogOku(read - 1);
                 
             break;
             case 2:

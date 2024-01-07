@@ -17,11 +17,4 @@ CIN Dondurma
 PAW asrin454545
 BIO Tetris fan
 WRB 112 132
-TKP mustafa erdem
-Hesap 3
-ISM erdem
-KAT 12-13-2004
-DOT 12/12/2004
-CIN Erkek
-PAW falleErdem12
-BIO engineer
+TKP mustafa
