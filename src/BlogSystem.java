@@ -8,6 +8,7 @@ import java. util. Random;
 
 public class BlogSystem {
 
+    static private Hesap userSession;
     static private Kullanici kullaniciSession;
     static private Yazar yazarSession;
     static private Admin adminSession;
@@ -47,7 +48,8 @@ public class BlogSystem {
 
         switch(editing){
             case 1:
-                System.out.println("Buraya isim editleme işlemleri gelio inş");
+            System.out.println("Yeni isim giriniz.");
+                String isim = userSession.getKullaniciAd();
             break;
             case 2:
                 System.out.println("Buraya şifre editleme işlemleri gelio inş");
@@ -67,7 +69,7 @@ public class BlogSystem {
 
     static void Usergiris(int preset){
 
-        System.out.println("----------   USER HAVALI ANA MENÜ WOOO   ----------");
+        System.out.println("----------   HAVALI ANA MENÜ WOOO   ----------");
         System.out.println("Gitmek istediğiniz yeri seçin: ");
         System.out.print("1-Latest Blogs  2-Popular Blogs  3-Following  4-Followers  5-Profile 6-Exit account ");
 
@@ -81,16 +83,6 @@ public class BlogSystem {
 
         switch (destination) {
             case 1:
-                System.out.println("Latest Blogs: ");
-                
-                for (int i = 0; i < blogList.size(); i++) {
-                    System.out.println(blogList.get(i));
-                  }
-                  /*System.out.println("Geri dönmek için 0 basın.");
-                  int a = 1;
-                  while(a != 0){
-                    a = input.nextInt();
-                  };*/
                 break;
             case 2:
                 System.out.println("Popular Blogs");
@@ -98,12 +90,9 @@ public class BlogSystem {
                 for (int i = 0; i < blogList.size(); i++) {
                     System.out.println(blogList.get(i));
                   }
-                  /*System.out.println("Geri dönmek için 0 basın.");
-                  a = 1;
-                  while(a != 0){
-                    a = input.nextInt();
-                  };*/
-                break;
+                Usergiris(preset);
+                // TODO System.out.println("Bloglari okumak icin 0 Geri dönmek için 1 basın.");
+            break;
             case 3:
                 System.out.println("Followers: ");
                  /*  a = 1;
@@ -160,11 +149,11 @@ public class BlogSystem {
             String publishDate = currentDate.format(new Date());
 
             blogList.add(new BlogYazisi(ID , isim , icerik, publishDate));
-            System.out.println("Blogunuz başariyla oluşturuldu!");
-            System.out.println(blogList.get(0).ID + blogList.get(0).icerik);
+            // System.out.println(blogList.get(0).ID + blogList.get(0).icerik);
         }
 
     static void startBlogger(Hesap usrSession, int preset) {
+        userSession = (Hesap) usrSession;
         switch (preset) {
             case 1:
             kullaniciSession = (Kullanici) usrSession;
