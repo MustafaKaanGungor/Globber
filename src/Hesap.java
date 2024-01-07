@@ -14,6 +14,15 @@ public class Hesap {
         this.password = password;
     }
 
+    Hesap(String kullaniciAd, String kayitTarihi, String dogumTarihi, String cinsiyet, String password, String bio) {
+        this.kullaniciAd = kullaniciAd;
+        this.kayitTarihi = kayitTarihi;
+        this.dogumTarihi = dogumTarihi;
+        this.cinsiyet = cinsiyet;
+        this.password = password;
+        this.bio = bio;
+    }
+
     public String getKullaniciAd() {
         return kullaniciAd;
     }

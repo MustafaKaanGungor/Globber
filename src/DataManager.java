@@ -108,28 +108,30 @@ public class DataManager {
                 
                 if(accountType == 1) {
                     if(!usrComments.isEmpty()) {
-                        usrComments.trim();
-                        for(String comment:usrComments.split("[a-zA-Z_0-9]")) {
-                            System.out.println(comment);
+                        usrComments = usrComments.trim();
+                        for(String comment:usrComments.split("[^0-9]")) {
                             Integer commentID = Integer.parseInt(comment);
                             usrComment.add(commentID);
                         }
                     }
                     if(!usrFollowWriter.isEmpty()) {
-                        usrFollowWriter.trim();
-                        for(String writer:usrFollowWriter.split("[a-zA-Z_0-9]")) {
+                        usrFollowWriter = usrFollowWriter.trim();
+                        for(String writer:usrFollowWriter.split("[^a-z]")) {
+                            writer = writer.trim();
                             usrFollowedWriters.add(writer);
                         }
                     }
-                    if(!usrFollowTag.isEmpty()) {
-                        usrFollowTag.trim();
-                        for(String tagString: usrFollowTag.split("[a-zA-Z_0-9]")) {
+                    /*if(!usrFollowTag.isEmpty()) { //TODO burası çalışmıyor
+                        usrFollowTag = usrFollowTag.trim();
+                        for(String tagString: usrFollowTag.split("[^a-z]")) {
+                            tagString = tagString.trim();
+                            System.out.println("tag degeri "+ tagString);
                             usrFollowedTags.add(Tag.valueOf(tagString));
                         }
-                    }
+                    }*/
                     if(!usrHistory.isEmpty()) {
-                        usrHistory.trim();
-                        for(String history:usrHistory.split("[a-zA-Z_0-9]")) {
+                        usrHistory = usrHistory.trim();
+                        for(String history:usrHistory.split("[^0-9]")) {
                             Integer blogID = Integer.parseInt(history);
                             usrHistoryList.add(blogID);
                         } 
@@ -137,26 +139,28 @@ public class DataManager {
                 }
                 else if(accountType == 2) {
                     if(!writtenBlogs.isEmpty()) {
-                        writtenBlogs.trim();
-                        for(String blog: writtenBlogs.split("[a-zA-Z_0-9]")) {
+                        writtenBlogs = writtenBlogs.trim();
+                        for(String blog: writtenBlogs.split("[^0-9]")) {
                             Integer blogID = Integer.parseInt(blog);
                             writtenBlogList.add(blogID);
                         }
                     }
                     if(!followers.isEmpty()) {
-                        followers.trim();
-                        for(String follower: followers.split("[a-zA-Z_0-9]")) {
+                        followers = followers.trim();
+                        for(String follower: followers.split("[^a-z]")) {
+                            follower = follower.trim();
+                            System.out.println("takipciler " + follower);
                             followersList.add(follower);
                         }
                     }
                 }
                 
                 if(accountType == 1) {
-                    BlogSystem.hesapList.add(new Kullanici(usrBio, signDate, followers, birthDate, usrPassword,
+                    BlogSystem.hesapList.add(new Kullanici(usrName, signDate, birthDate, usrGender, usrPassword, usrBio,
                     usrComment, usrFollowedWriters,usrFollowedTags,usrHistoryList));
                 }
                 else if(accountType == 2) {
-                    BlogSystem.hesapList.add(new Yazar(usrBio, signDate, followers, birthDate, usrPassword,
+                    BlogSystem.hesapList.add(new Yazar(usrName, signDate, birthDate, usrGender, usrPassword, usrBio,
                     writtenBlogList, followersList));
                 }
                 else if(accountType == 3) {

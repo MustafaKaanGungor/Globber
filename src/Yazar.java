@@ -5,8 +5,8 @@ public class Yazar extends Hesap implements YazarIslem, KullaniciIslem{
         super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet, password);
     }
     
-    Yazar(String kullaniciAd, String kayitTarihi, String dogumTarihi, String cinsiyet, String password, ArrayList<Integer> blogs, ArrayList<String> followers) {
-        super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet, password);
+    Yazar(String kullaniciAd, String kayitTarihi, String dogumTarihi, String cinsiyet, String password,String bio, ArrayList<Integer> blogs, ArrayList<String> followers) {
+        super(kullaniciAd, kayitTarihi, dogumTarihi, cinsiyet, password, bio);
         this.yazilanBloglar = (ArrayList<Integer>)blogs.clone();
         this.takipciler = (ArrayList<String>)followers.clone(); //TODO buradaki uyarının nedenini araştır
     }
