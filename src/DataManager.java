@@ -121,14 +121,16 @@ public class DataManager {
                             usrFollowedWriters.add(writer);
                         }
                     }
-                    /*if(!usrFollowTag.isEmpty()) { //TODO burası çalışmıyor
+                    if(!usrFollowTag.isEmpty()) { //TODO burası çalışmıyor
                         usrFollowTag = usrFollowTag.trim();
-                        for(String tagString: usrFollowTag.split("[^a-z]")) {
+                        for(String tagString: usrFollowTag.split("[^A-Za-z]")) {
                             tagString = tagString.trim();
-                            System.out.println("tag degeri "+ tagString);
-                            usrFollowedTags.add(Tag.valueOf(tagString));
+                            if(!tagString.isEmpty()) {
+                                Tag tempTag = Tag.valueOf(tagString);
+                                usrFollowedTags.add(tempTag);
+                            }
                         }
-                    }*/
+                    }
                     if(!usrHistory.isEmpty()) {
                         usrHistory = usrHistory.trim();
                         for(String history:usrHistory.split("[^0-9]")) {
@@ -149,7 +151,6 @@ public class DataManager {
                         followers = followers.trim();
                         for(String follower: followers.split("[^a-z]")) {
                             follower = follower.trim();
-                            System.out.println("takipciler " + follower);
                             followersList.add(follower);
                         }
                     }
