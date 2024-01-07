@@ -2,6 +2,13 @@ import java.util.ArrayList;
 
 public class BlogYazisi {
 
+    BlogYazisi(int ID,String baslik,String icerik, String yayintarihi){
+        this.ID=ID;
+        this.baslik=baslik;
+        this.icerik=icerik;
+        this.yayinTarihi=yayintarihi;
+    }
+    
     Integer ID;
     String baslik;
     String icerik;

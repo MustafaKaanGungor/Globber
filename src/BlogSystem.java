@@ -1,5 +1,11 @@
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+import java. util. Random;
+
 public class BlogSystem {
 
     static private Kullanici kullaniciSession;
@@ -9,6 +15,8 @@ public class BlogSystem {
     
     static ArrayList<Hesap> hesapList = new ArrayList<Hesap>(); //tüm adminler yazarlar ve kullanıcılar burada -Mustafa
     static ArrayList<BlogYazisi> blogList = new ArrayList<BlogYazisi>(); //tüm blog postları
+    static ArrayList<Yorum> yorumList = new ArrayList<Yorum>();  // yorumlar
+
 
     static void Profile(int destination) {
         System.out.println("Name:         Birth date:    "); // bunlara nerden erişeceğimi bulamadm 
@@ -61,7 +69,7 @@ public class BlogSystem {
 
         System.out.println("----------   USER HAVALI ANA MENÜ WOOO   ----------");
         System.out.println("Gitmek istediğiniz yeri seçin: ");
-        System.out.println("1-Latest Blogs  2-Popular Blogs  3-Following  4-Followers  5-Profile 6-Exit account ");
+        System.out.print("1-Latest Blogs  2-Popular Blogs  3-Following  4-Followers  5-Profile 6-Exit account ");
 
         if(preset == 2 || preset == 3){
         Yazargiris();
@@ -117,7 +125,8 @@ public class BlogSystem {
                 Start.logOut();
                 break;
             case 7:
-            break;
+                BlogEkle();
+                break;
             case 8:
             break;
 
@@ -129,7 +138,7 @@ public class BlogSystem {
     }
 
         static void Yazargiris() { 
-            System.out.print(" 7-Add new blog 8-Edit a blog");
+            System.out.print("7-Add new blog 8-Edit a blog");
         }
 
         static void Admingiris() {
@@ -137,6 +146,24 @@ public class BlogSystem {
         }
 
     
+        static void BlogEkle(){
+            Random randomID = new Random();
+            int ID = randomID.nextInt(10000);
+
+            System.out.println("Blog ismini yazın:");
+            String xd = input.nextLine();
+            String isim = input.nextLine();
+            System.out.println("İçerik giriniz.");
+            String icerik = input.nextLine(); 
+
+            DateFormat currentDate = new SimpleDateFormat();
+            String publishDate = currentDate.format(new Date());
+
+            blogList.add(new BlogYazisi(ID , isim , icerik, publishDate));
+            System.out.println("Blogunuz başariyla oluşturuldu!");
+            System.out.println(blogList.get(0).ID + blogList.get(0).icerik);
+        }
+
     static void startBlogger(Hesap usrSession, int preset) {
         switch (preset) {
             case 1:
