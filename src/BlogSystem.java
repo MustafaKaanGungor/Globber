@@ -110,7 +110,7 @@ public class BlogSystem {
             System.out.println("Popular Blogs");
             
             for (int i = 0; i < blogList.size(); i++) {
-                System.out.print(i+". blog: ");
+                System.out.print(i+1 +". blog: ");
                 System.out.println(blogList.get(i).baslik);
             }
             System.out.println("Type the blog you want to read");
@@ -150,10 +150,10 @@ public class BlogSystem {
                 Random randomID = new Random();
                 int ID = randomID.nextInt(10000);
                 
-                System.out.println("Blog ismini yazın:");
+                System.out.println("Enter blog name:");
                 String xd = input.nextLine();
                 String isim = input.nextLine();
-                System.out.println("İçerik giriniz.");
+                System.out.println("Enter contents.");
                 String icerik = input.nextLine();
                 
                 DateFormat currentDate = new SimpleDateFormat();
