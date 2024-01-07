@@ -280,7 +280,7 @@ public class Start {
             }
         }
         
-        static int checkPasswordSuffiency(String Password) {
+        public static int checkPasswordSuffiency(String Password) {
             Matcher letterMatcher = userPasswordLetterPattern.matcher(Password);
             Matcher numberMatcher = userPasswordNumberPattern.matcher(Password);
             if(letterMatcher.find() && numberMatcher.find() && Password.length() >= 8) {
