@@ -8,9 +8,9 @@ import java.util.Iterator;
 
 public class Start {
     static int globberPreset;
-
+    
     static Scanner input = new Scanner(System.in);
-
+    
     static Pattern userNamePattern = Pattern.compile("[A-Z]");
     static Pattern userGenderPatten = Pattern.compile("[0-9]");
     static Pattern userPasswordLetterPattern = Pattern.compile("[A-Z]");//TODO regexi daha iyi hale getir
@@ -34,36 +34,36 @@ public class Start {
     static void loadData() {
         System.out.println("Data is loading");
         DataManager.loadData();
-
+        
         Iterator<Hesap> it = BlogSystem.hesapList.iterator();
         while(it.hasNext()) {
             System.out.println(it.next().getKullaniciAd());
         }
-
+        
         System.out.println("Done");
     }
-
+    
     static void globberTypeSelect() {
         System.out.println("1- Globber    2- Globber for Writers    3- Globber Admin Login");
         int logOption = input.nextInt();
-
+        
         switch (logOption) {
             case 1:
-                globberPreset = 1;
-                startupScreen();
-                break;
+            globberPreset = 1;
+            startupScreen();
+            break;
             case 2:
-                globberPreset = 2;
-                startupScreen();
-                break;
+            globberPreset = 2;
+            startupScreen();
+            break;
             case 3:
-                globberPreset = 3;
-                getUsrName(1);
-                break;
+            globberPreset = 3;
+            getUsrName(1);
+            break;
             default:
-                System.out.println("Please select one of the given options");
-                break;
-
+            System.out.println("Please select one of the given options");
+            break;
+            
         }
     }
     
@@ -106,11 +106,17 @@ public class Start {
         globberTypeSelect();
     }
     
-    static void getUsrName(int option) {
+    static String getisim(){
         System.out.println("Enter Username  (0- Back)");
         System.out.print("=>");
-        String usrName = input.next();
-        
+        String userName = input.next();
+        return userName;
+    }
+    
+    public static void getUsrName(int option) {
+
+        String usrName = getisim();
+
         if(usrName.charAt(0) == '0') { //Go back
             System.out.println("Returning back to menu."); //Adminden geri çıkış için seçenek ekle
             startupScreen();
@@ -151,144 +157,145 @@ public class Start {
             startupScreen();
         }
         //else if(usrbirthDate.charAt(2) == '/' && usrbirthDate.charAt(5) == '/') {
-       //     System.out.println("Please enter date in DD/MM/YYYY format."); //TODO bu kod çalışmıyor
-       // } //TODO üşenmezsen verilen tarihin sayılarını kontrol et
-        else {
-            getUsrGender(usrName, usrbirthDate);
-        }
-    }
-    
-    static void getUsrGender(String usrName, String usrBirthDate) {
-        System.out.println("Enter Gender:  (0- Back)");
-        System.out.print("=>");
-        String usrGender = input.next();
-        usrGender = usrGender.trim();
-        Matcher matcher = userGenderPatten.matcher(usrGender);
-        if(usrGender.charAt(0) == '0') { //Go back
-            System.out.println("Returning back to menu.");
-            startupScreen();
-        }
-        else if (matcher.find()) {
-            System.out.println("Please enter a valid gender");
-            getUsrGender(usrName, usrBirthDate);;
-        }
-        else {
-            getUsrPassword(usrName, usrBirthDate, usrGender);
-        }
-    }
-    
-    static void getUsrPassword(Hesap usrAccount) { //Log in
-        System.out.println("Enter Password  (0- Back)");
-        System.out.print("=>");
-        String usrPassword = input.next();
-        
-        if(usrPassword.charAt(0) == '0') { //Go back
-            System.out.println("Returning back to menu.");
-            startupScreen();
-        }
-        else if(checkPassword(usrAccount, usrPassword) == 1) {
-            System.out.println("Login succesfull. Directing to Globber.");
-            BlogSystem.startBlogger(usrAccount, globberPreset);
-        }
-        else {
-            System.out.println("Password is incorrect try again.");
-            getUsrPassword(usrAccount);
-        }
-        
-    }
-    
-    static void getUsrPassword(String usrName, String usrBirthDate, String usrGender) { //Sign up
-        System.out.println("Enter Password  (0- Back)");
-        System.out.print("=>");
-        String usrPassword= input.next();
-        
-        if(usrPassword.charAt(0) == '0') { //Go back
-            System.out.println("Returning back to menu.");
-            startupScreen();
-        }
-        else if(checkPasswordSuffiency(usrPassword) == 1) {
-            createAccount(usrName, usrBirthDate, usrGender, usrPassword);
-        }
-        else {
-            System.out.println("Password should be at least 8 characters and should include;");
-            System.out.println(" - At least 1 capital letter");
-            System.out.println(" - At least 1 lowercase letter");
-            System.out.println(" - At least 1 number");
-            getUsrPassword(usrName, usrBirthDate, usrGender);
-        }
-        
-    }
-    
-    static void createAccount(String usrName, String usrBirthDate, String usrGender, String usrPassword) {
-        System.out.println("Account got created succesfully.");
-        DateFormat currentDate = new SimpleDateFormat();
-        String signDate = currentDate.format(new Date());
-        switch (globberPreset) {
-            case 1:
-            BlogSystem.hesapList.add(new Kullanici(usrName, signDate, usrBirthDate, usrGender, usrPassword));
-            break;
-            case 2:
-            BlogSystem.hesapList.add(new Yazar(usrName, signDate, usrBirthDate, usrGender, usrPassword));
-            break;
-            default:
-            break;
-        }
-        
-        startupScreen();
-    }
-    
-    static Hesap checkIfUserExists(String usrName) {
-        Iterator<Hesap> iterator = BlogSystem.hesapList.iterator();
-        
-        while(iterator.hasNext()) {
-            Hesap finderHesap = iterator.next();
-            if(finderHesap.getKullaniciAd().equals(usrName)) {
-                return finderHesap;
+            //     System.out.println("Please enter date in DD/MM/YYYY format."); //TODO bu kod çalışmıyor
+            // } //TODO üşenmezsen verilen tarihin sayılarını kontrol et
+            else {
+                getUsrGender(usrName, usrbirthDate);
             }
         }
-        return null;
-    }
-    
-    static int checkPassword(Hesap usr, String password) {
-        if(usr.getPassword().equals(password)) {
-            return 1;
+        
+        static void getUsrGender(String usrName, String usrBirthDate) {
+            System.out.println("Enter Gender:  (0- Back)");
+            System.out.print("=>");
+            String usrGender = input.next();
+            usrGender = usrGender.trim();
+            Matcher matcher = userGenderPatten.matcher(usrGender);
+            if(usrGender.charAt(0) == '0') { //Go back
+                System.out.println("Returning back to menu.");
+                startupScreen();
+            }
+            else if (matcher.find()) {
+                System.out.println("Please enter a valid gender");
+                getUsrGender(usrName, usrBirthDate);;
+            }
+            else {
+                getUsrPassword(usrName, usrBirthDate, usrGender);
+            }
         }
-        return 0;
-    }
-    
-    static int checkUserNameAvailablity(String usrName) {
-        Matcher matcher = userNamePattern.matcher(usrName);
-        if(matcher.find()) {
-            return 1;
+        
+        static void getUsrPassword(Hesap usrAccount) { //Log in
+            System.out.println("Enter Password  (0- Back)");
+            System.out.print("=>");
+            String usrPassword = input.next();
+            
+            if(usrPassword.charAt(0) == '0') { //Go back
+                System.out.println("Returning back to menu.");
+                startupScreen();
+            }
+            else if(checkPassword(usrAccount, usrPassword) == 1) {
+                System.out.println("Login succesfull. Directing to Globber.");
+                BlogSystem.startBlogger(usrAccount, globberPreset);
+            }
+            else {
+                System.out.println("Password is incorrect try again.");
+                getUsrPassword(usrAccount);
+            }
+            
         }
-        else {
+        
+        static void getUsrPassword(String usrName, String usrBirthDate, String usrGender) { //Sign up
+            System.out.println("Enter Password  (0- Back)");
+            System.out.print("=>");
+            String usrPassword= input.next();
+            
+            if(usrPassword.charAt(0) == '0') { //Go back
+                System.out.println("Returning back to menu.");
+                startupScreen();
+            }
+            else if(checkPasswordSuffiency(usrPassword) == 1) {
+                createAccount(usrName, usrBirthDate, usrGender, usrPassword);
+            }
+            else {
+                System.out.println("Password should be at least 8 characters and should include;");
+                System.out.println(" - At least 1 capital letter");
+                System.out.println(" - At least 1 lowercase letter");
+                System.out.println(" - At least 1 number");
+                getUsrPassword(usrName, usrBirthDate, usrGender);
+            }
+            
+        }
+        
+        static void createAccount(String usrName, String usrBirthDate, String usrGender, String usrPassword) {
+            System.out.println("Account got created succesfully.");
+            DateFormat currentDate = new SimpleDateFormat();
+            String signDate = currentDate.format(new Date());
+            switch (globberPreset) {
+                case 1:
+                BlogSystem.hesapList.add(new Kullanici(usrName, signDate, usrBirthDate, usrGender, usrPassword));
+                break;
+                case 2:
+                BlogSystem.hesapList.add(new Yazar(usrName, signDate, usrBirthDate, usrGender, usrPassword));
+                break;
+                default:
+                break;
+            }
+            
+            startupScreen();
+        }
+        
+        static Hesap checkIfUserExists(String usrName) {
             Iterator<Hesap> iterator = BlogSystem.hesapList.iterator();
             
             while(iterator.hasNext()) {
-                String ad = iterator.next().getKullaniciAd();
-                if(ad.equals(usrName)) {
-                    return 2;
+                Hesap finderHesap = iterator.next();
+                if(finderHesap.getKullaniciAd().equals(usrName)) {
+                    return finderHesap;
                 }
+            }
+            return null;
+        }
+        
+        static int checkPassword(Hesap usr, String password) {
+            if(usr.getPassword().equals(password)) {
+                return 1;
             }
             return 0;
         }
-    }
-    
-    static int checkPasswordSuffiency(String Password) {
-        Matcher letterMatcher = userPasswordLetterPattern.matcher(Password);
-        Matcher numberMatcher = userPasswordNumberPattern.matcher(Password);
-        if(letterMatcher.find() && numberMatcher.find() && Password.length() >= 8) {
-            return 1;
+        
+        static int checkUserNameAvailablity(String usrName) {
+            Matcher matcher = userNamePattern.matcher(usrName);
+            if(matcher.find()) {
+                return 1;
+            }
+            else {
+                Iterator<Hesap> iterator = BlogSystem.hesapList.iterator();
+                
+                while(iterator.hasNext()) {
+                    String ad = iterator.next().getKullaniciAd();
+                    if(ad.equals(usrName)) {
+                        return 2;
+                    }
+                }
+                return 0;
+            }
         }
-        return 0;
+        
+        static int checkPasswordSuffiency(String Password) {
+            Matcher letterMatcher = userPasswordLetterPattern.matcher(Password);
+            Matcher numberMatcher = userPasswordNumberPattern.matcher(Password);
+            if(letterMatcher.find() && numberMatcher.find() && Password.length() >= 8) {
+                return 1;
+            }
+            return 0;
+        }
+        
+        static void info() {
+            System.out.println("Globber is a Blog sharing and reading platform for everyone!");
+            System.out.println("");
+            System.out.println("Made by BringSalavat, Asrin and FalleErdem");
+            System.out.println("");
+            //TODO: Github readmesini oluşturunca buraya ekle
+            startupScreen();
+        }
     }
     
-    static void info() {
-        System.out.println("Globber is a Blog sharing and reading platform for everyone!");
-        System.out.println("");
-        System.out.println("Made by BringSalavat, Asrin and FalleErdem");
-        System.out.println("");
-        //TODO: Github readmesini oluşturunca buraya ekle
-        startupScreen();
-    }
-}
