@@ -20,7 +20,7 @@ public class DataManager {
     static String followers = "";
     
     
-    static File dosya = new File("data/Hello.txt");
+    static File dosya = new File("data/Hesaplar.txt");
     public static void loadData() {
         Scanner reader;
         

@@ -1,0 +1,12 @@
+Yorum
+IDN 11222
+KON 112
+YZR mustafa
+TEX Tamamiyle katiliyorum. Cok iyi bir yazi.
+LKE 53
+Yorum
+IDN
+KON
+YZR
+TEX
+LKE
