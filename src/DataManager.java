@@ -329,6 +329,14 @@ public class DataManager {
                     likeCount = reader.nextInt();
                     default:
                 }
+                
+                BlogSystem.yorumList.add(new Yorum(ID, blog, writer, text, likeCount));
+                
+                ID = 0;
+                blog = 0;
+                writer = "";
+                text = "";
+                likeCount = 0;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
