@@ -18,7 +18,7 @@ public class BlogSystem {
     static ArrayList<Yorum> yorumList = new ArrayList<Yorum>(); // yorumlar
     
     static void Profile(int destination) {
-        System.out.println("Name:         Birth date:    "); // bunlara nerden erişeceğimi bulamadm
+        System.out.println("Name:    " + userSession.getKullaniciAd() + "Birth Date: " + userSession.getDogumTarihi());
         System.out.println("Press 1 to Edit your profile, 2 for your blogging history");
         destination = input.nextInt();
         
@@ -50,7 +50,7 @@ public class BlogSystem {
             Profile(destination);
             break;
             case 1:
-            System.out.println("Yeni isim giriniz."); 
+            System.out.println("Enter a new name."); 
             String isim1 = input.next();     //    TODO büyük küçük harf kontrol et
             
             for(int i=0;i<hesapList.size();i++){
@@ -61,17 +61,23 @@ public class BlogSystem {
             userSession.setKullaniciAd(isim1);
             break;
             case 2:
-            System.out.println("Yeni şifre giriniz.");
+            System.out.println("Enter a new password.");
             String sifre1 = input.next();
             if(Start.checkPasswordSuffiency(sifre1)== 1){
                 userSession.setPassword(sifre1);
-            }
+            }else{
+                System.out.println("Password should be at least 8 characters and should include;");
+                System.out.println(" - At least 1 capital letter");
+                System.out.println(" - At least 1 lowercase letter");
+                System.out.println(" - At least 1 number");
+                EditProfile(destination);}
             break;
             case 3:
             System.out.println("Enter Birth Date (DD/MM/YYYY):  (0- Back)");
             System.out.print("=>");
             String dogumtarihi = input.next();
             dogumtarihi = dogumtarihi.trim();
+            userSession.setDogumTarihi(dogumtarihi);
             break;
             default: 
             System.out.println("Please enter one of the options.");
@@ -105,10 +111,12 @@ public class BlogSystem {
             
             for (int i = 0; i < blogList.size(); i++) {
                 System.out.print(i+". blog: ");
-                System.out.println(blogList.get(i));
+                System.out.println(blogList.get(i).baslik);
             }
-            System.out.println("");
-            // TODO System.out.println("Bloglari okumak icin 0 Geri dönmek için 1 basın.");
+            System.out.println("Type the blog you want to read");
+            int read = input.nextInt();
+                blogOku(read);
+                
             break;
             case 2:
             System.out.println("Followers: ");
@@ -169,6 +177,10 @@ public class BlogSystem {
                     Usergiris(preset);
                     break;
                 }
+            }
+            
+            static void blogOku(int read){
+                System.out.println(blogList.get(read).icerik);
             }
             
         }
