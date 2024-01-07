@@ -34,12 +34,6 @@ public class Start {
     static void loadData() {
         System.out.println("Data is loading");
         DataManager.loadData();
-        
-        Iterator<Hesap> it = BlogSystem.hesapList.iterator();
-        while(it.hasNext()) {
-            System.out.println(it.next().getKullaniciAd());
-        }
-        
         System.out.println("Done");
     }
     
