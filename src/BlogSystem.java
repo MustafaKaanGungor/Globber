@@ -75,8 +75,8 @@ public class BlogSystem {
             case 1:
                 System.out.println("Latest Blogs: ");
                 
-                for (int i = 0; i < hesapList.size(); i++) {
-                    System.out.println(hesapList.get(i));
+                for (int i = 0; i < blogList.size(); i++) {
+                    System.out.println(blogList.get(i));
                   }
                   /*System.out.println("Geri dönmek için 0 basın.");
                   int a = 1;
@@ -87,8 +87,8 @@ public class BlogSystem {
             case 2:
                 System.out.println("Popular Blogs");
                 
-                for (int i = 0; i < hesapList.size(); i++) {
-                    System.out.println(hesapList.get(i));
+                for (int i = 0; i < blogList.size(); i++) {
+                    System.out.println(blogList.get(i));
                   }
                   /*System.out.println("Geri dönmek için 0 basın.");
                   a = 1;
@@ -136,7 +136,7 @@ public class BlogSystem {
             System.out.println(" 9- Burn it all down");
         }
 
-
+    
     static void startBlogger(Hesap usrSession, int preset) {
         switch (preset) {
             case 1:
