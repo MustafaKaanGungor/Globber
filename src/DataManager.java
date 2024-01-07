@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class DataManager {
     
     static File accountFile = new File("data/Hesaplar.txt");
-    static File blogFile = new File("data/Blogler.txt");
+    static File blogFile = new File("data/Bloglar.txt");
     static File commentFile = new File("data/Yorumlar.txt");
     
     static Scanner reader;
@@ -201,7 +201,7 @@ public class DataManager {
     
     static void loadBlogs() {
         
-        Integer ID = 0;
+        int ID = 0;
         String title = "";
         String content = "";
         String publishDate = "";
@@ -216,7 +216,7 @@ public class DataManager {
             while(reader.hasNextLine()) {
                 switch(reader.next()) {
                     case "Blog":
-                    
+                    reader.next();
                     case "IDN":
                     ID = reader.nextInt();
                     if(!reader.next().equals("BAS")) {
@@ -224,21 +224,25 @@ public class DataManager {
                     }
                     case "BAS":
                     title = reader.nextLine();
+                    tag = tag.trim();
                     if(!reader.next().equals("CON")) {
                         break;
                     }
                     case "CON":
                     content = reader.nextLine();
+                    tag = tag.trim();
                     if(!reader.next().equals("PUB")) {
                         break;
                     }
                     case "PUB":
                     publishDate = reader.next();
+                    tag = tag.trim();
                     if(!reader.next().equals("TAG")) {
                         break;
                     }
                     case "TAG":
                     tag = reader.next();
+                    tag = tag.trim();
                     if(!reader.next().equals("LKE")) {
                         break;
                     }
@@ -249,6 +253,7 @@ public class DataManager {
                     }
                     case "COM":
                     comment = reader.nextLine();
+                    tag = tag.trim();
                     if(!reader.next().equals("RRT")) {
                         break;
                     }
@@ -258,6 +263,8 @@ public class DataManager {
                 }
                 ArrayList<Integer> comments = new ArrayList<Integer>();
                 Tag BlogTag = null;
+
+                Integer IDInt = Integer.valueOf(ID);
                 
                 if(!comment.isEmpty()) {
                     comment = comment.trim();
@@ -274,7 +281,7 @@ public class DataManager {
                     }
                 }
                 
-                BlogSystem.blogList.add(new BlogYazisi(ID,title,content,publishDate,BlogTag,likeCount,comments,viewCount));
+                BlogSystem.blogList.add(new BlogYazisi(IDInt,title,content,publishDate,BlogTag,likeCount,comments,viewCount));
                 
                 ID = 0;
                 title = "";
@@ -304,7 +311,7 @@ public class DataManager {
             while (reader.hasNextLine()) {
                 switch(reader.next()) {
                     case "Yorum":
-                    
+                    reader.next();
                     case "IDN":
                     ID = reader.nextInt();
                     if(!reader.next().equals("KON")) {
