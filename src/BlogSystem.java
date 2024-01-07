@@ -11,21 +11,32 @@ public class BlogSystem {
     static ArrayList<BlogYazisi> blogList = new ArrayList<BlogYazisi>(); //tüm blog postları
 
     static void Profile(int destination) {
-        System.out.println("Name:         Birth date:    ");
-
+        System.out.println("Name:         Birth date:    "); // bunlara nerden erişeceğimi bulamadm 
         System.out.println("Press 1 to Edit your profile, 2 for your blogging history");
         destination = input.nextInt();
-        if(destination==1){
-            EditProfile();
-        }else if(destination==2){
-            BloggingHistory();
-        }else {
-            System.out.println("Please select one of the options.");
+
+        while(destination!= 0 || destination!=1 || destination!=2){
+            switch(destination){
+                case 0:
+                Usergiris(destination);
+                break;            
+                case 1:
+                EditProfile();
+                break;
+                case 2:
+                BloggingHistory();
+                break;
+                default:
+                System.out.println("Please select one of the options.");
+                break;
+            }
         }
     }
+
     static void EditProfile() {
         System.out.println("1 for editing name  2 for editing password  3 for editing birth date");
         int editing = input.nextInt();
+
         switch(editing){
             case 1:
                 System.out.println("Buraya isim editleme işlemleri gelio inş");
@@ -42,53 +53,106 @@ public class BlogSystem {
     static void BloggingHistory() {
         System.out.println("Your blogging history:");
 
-        // eklencek daha :sob:
+
+
     }
 
-    static void Usergiris(){
+    static void Usergiris(int preset){
 
         System.out.println("----------   USER HAVALI ANA MENÜ WOOO   ----------");
         System.out.println("Gitmek istediğiniz yeri seçin: ");
-        System.out.println("1-Latest Blogs  2-Popular Blogs  3-Takip edilenler  4-Takipçiler  5-Profil");
+        System.out.println("1-Latest Blogs  2-Popular Blogs  3-Following  4-Followers  5-Profile 6-Exit account ");
+
+        if(preset == 2 || preset == 3){
+        Yazargiris();
+        }else if(preset == 3){
+            Admingiris();
+        }    //  burada yazar veya admin giriş yapıosa blog yaz-düzenle şıklarını ekliyo
+
         int destination = input.nextInt();
 
         switch (destination) {
             case 1:
                 System.out.println("Latest Blogs: ");
+                
+                for (int i = 0; i < hesapList.size(); i++) {
+                    System.out.println(hesapList.get(i));
+                  }
+                  /*System.out.println("Geri dönmek için 0 basın.");
+                  int a = 1;
+                  while(a != 0){
+                    a = input.nextInt();
+                  };*/
                 break;
             case 2:
                 System.out.println("Popular Blogs");
+                
+                for (int i = 0; i < hesapList.size(); i++) {
+                    System.out.println(hesapList.get(i));
+                  }
+                  /*System.out.println("Geri dönmek için 0 basın.");
+                  a = 1;
+                  while(a != 0){
+                    a = input.nextInt();
+                  };*/
                 break;
             case 3:
                 System.out.println("Followers: ");
+                 /*  a = 1;
+                  while(a != 0){
+                    a = input.nextInt();
+                  };*/
                 break;
             case 4:
                 System.out.println("Following: ");
+                  /*a = 1;
+                  while(a != 0){
+                    a = input.nextInt();
+                  };*/
                 break;
             case 5:
                 Profile(destination);
                 break;
+            case 6:
+                Start.logOut();
+                break;
+            case 7:
+            break;
+            case 8:
+            break;
+
             default:
                 System.out.println("Please select one of the given options");
-                Usergiris();
+                Usergiris(preset);
                 break;
         }
+    }
 
+        static void Yazargiris() { 
+            System.out.print(" 7-Add new blog 8-Edit a blog");
         }
+
+        static void Admingiris() {
+            System.out.println(" 9- Burn it all down");
+        }
+
+
     static void startBlogger(Hesap usrSession, int preset) {
         switch (preset) {
             case 1:
             kullaniciSession = (Kullanici) usrSession;
-            Usergiris();
+            Usergiris(preset);
             break;
             case 2:
             yazarSession = (Yazar) usrSession;
             System.out.println("Yazar girisi");
+            Usergiris(preset);
 
             break;
             case 3:
             adminSession = (Admin) usrSession;
             System.out.println("Admin girisi");
+            Usergiris(preset);
             break;
         }
     }

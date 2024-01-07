@@ -94,8 +94,9 @@ public class Start {
         getUsrName(2);
     }
     
-    static void logOut() {
-        
+    public static void logOut() {
+        System.out.println("Logged out.");
+        globberTypeSelect();
     }
     
     static void getUsrName(int option) {
@@ -269,7 +270,7 @@ public class Start {
     static int checkPasswordSuffiency(String Password) {
         Matcher letterMatcher = userPasswordLetterPattern.matcher(Password);
         Matcher numberMatcher = userPasswordNumberPattern.matcher(Password);
-        if(letterMatcher.find() && numberMatcher.find() && Password.length() > 8) {
+        if(letterMatcher.find() && numberMatcher.find() && Password.length() >= 8) {
             return 1;
         }
         return 0;
