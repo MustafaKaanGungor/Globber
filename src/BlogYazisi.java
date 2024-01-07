@@ -2,11 +2,23 @@ import java.util.ArrayList;
 
 public class BlogYazisi {
 
-    BlogYazisi(int ID,String baslik,String icerik, String yayintarihi){
-        this.ID=ID;
-        this.baslik=baslik;
-        this.icerik=icerik;
-        this.yayinTarihi=yayintarihi;
+    BlogYazisi(int ID,String title,String content, String publishDate){
+        this.ID = ID;
+        this.baslik = title;
+        this.icerik = content;
+        this.yayinTarihi = publishDate;
+    }
+
+    BlogYazisi(int ID,String title,String content, String publishDate,
+     Tag tag, int likeCount, ArrayList<Integer> comments, int viewCount) {
+        this.ID = ID;
+        this.baslik = title;
+        this.icerik = content;
+        this.yayinTarihi = publishDate;
+        this.tag = tag;
+        this.begeniSayisi = likeCount;
+        this.yorumlar = (ArrayList<Integer>)comments.clone();
+        this.goruntulenmeSayisi = viewCount;
     }
     
     Integer ID;
@@ -16,8 +28,6 @@ public class BlogYazisi {
     Tag tag; //Sadece 1 tag eklemeye izin var
     int begeniSayisi;
     ArrayList<Integer> yorumlar = new ArrayList<Integer>();
-    int yorumSayisi; //yorum sayısını ya her yorum eklendiğinde ve silindiğinde arttırıp azaltıcaz ya da 
-    //süreki yorum sayısını yorumlar.size() a eşitleyen bi kod yazıcaz.
     int goruntulenmeSayisi;
 
     BlogYazisi goruntule() {

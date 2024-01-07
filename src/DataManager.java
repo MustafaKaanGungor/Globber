@@ -5,27 +5,37 @@ import java.util.Scanner;
 
 public class DataManager {
     
-    static int accountType = 0;
-    static String usrName = "";
-    static String signDate = "";
-    static String birthDate = "";
-    static String usrGender = "";
-    static String usrPassword = "";
-    static String usrBio = "";
-    static String usrComments = "";
-    static String usrFollowWriter = "";
-    static String usrFollowTag = "";
-    static String usrHistory = "";
-    static String writtenBlogs = "";
-    static String followers = "";
+    static File accountFile = new File("data/Hesaplar.txt");
+    static File blogFile = new File("data/Blogler.txt");
+    static File commentFile = new File("data/Yorumlar.txt");
     
+    static Scanner reader;
     
-    static File dosya = new File("data/Hesaplar.txt");
     public static void loadData() {
-        Scanner reader;
+        
+        loadAccounts();
+        loadBlogs();
+        loadComments();
+    }
+    
+    static void loadAccounts() {
+        
+        int accountType = 0;
+        String usrName = "";
+        String signDate = "";
+        String birthDate = "";
+        String usrGender = "";
+        String usrPassword = "";
+        String usrBio = "";
+        String usrComments = "";
+        String usrFollowWriter = "";
+        String usrFollowTag = "";
+        String usrHistory = "";
+        String writtenBlogs = "";
+        String followers = "";
         
         try {
-            reader = new Scanner(dosya);
+            reader = new Scanner(accountFile);
             
             while(reader.hasNextLine()) {
                 switch(reader.next()) {
@@ -121,7 +131,7 @@ public class DataManager {
                             usrFollowedWriters.add(writer);
                         }
                     }
-                    if(!usrFollowTag.isEmpty()) { //TODO burası çalışmıyor
+                    if(!usrFollowTag.isEmpty()) {
                         usrFollowTag = usrFollowTag.trim();
                         for(String tagString: usrFollowTag.split("[^A-Za-z]")) {
                             tagString = tagString.trim();
@@ -184,6 +194,142 @@ public class DataManager {
             }
             
             
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    static void loadBlogs() {
+        
+        Integer ID = 0;
+        String title = "";
+        String content = "";
+        String publishDate = "";
+        String tag = "";
+        int likeCount = 0;
+        String comment = "";
+        int viewCount = 0;
+        
+        try {
+            reader = new Scanner(blogFile);
+            
+            while(reader.hasNextLine()) {
+                switch(reader.next()) {
+                    case "Blog":
+                    
+                    case "IDN":
+                    ID = reader.nextInt();
+                    if(!reader.next().equals("BAS")) {
+                        break;
+                    }
+                    case "BAS":
+                    title = reader.nextLine();
+                    if(!reader.next().equals("CON")) {
+                        break;
+                    }
+                    case "CON":
+                    content = reader.nextLine();
+                    if(!reader.next().equals("PUB")) {
+                        break;
+                    }
+                    case "PUB":
+                    publishDate = reader.next();
+                    if(!reader.next().equals("TAG")) {
+                        break;
+                    }
+                    case "TAG":
+                    tag = reader.next();
+                    if(!reader.next().equals("LKE")) {
+                        break;
+                    }
+                    case "LKE":
+                    likeCount = reader.nextInt();
+                    if(!reader.next().equals("COM")) {
+                        break;
+                    }
+                    case "COM":
+                    comment = reader.nextLine();
+                    if(!reader.next().equals("RRT")) {
+                        break;
+                    }
+                    case "RRT":
+                    viewCount = reader.nextInt();
+                    default:
+                }
+                ArrayList<Integer> comments = new ArrayList<Integer>();
+                Tag BlogTag = null;
+                
+                if(!comment.isEmpty()) {
+                    comment = comment.trim();
+                    for(String commentTemp:comment.split("[^0-9]")) {
+                        Integer commentID = Integer.parseInt(commentTemp);
+                        comments.add(commentID);
+                    }
+                }
+                if(!tag.isEmpty()) {
+                    tag = tag.trim();
+                    if(!tag.isEmpty()) {
+                        BlogTag = Tag.valueOf(tag);
+                        
+                    }
+                }
+                
+                BlogSystem.blogList.add(new BlogYazisi(ID,title,content,publishDate,BlogTag,likeCount,comments,viewCount));
+                
+                ID = 0;
+                title = "";
+                content = "";
+                publishDate = "";
+                tag = "";
+                likeCount = 0;
+                comment = "";
+                viewCount = 0;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    static void loadComments() {
+        
+        Integer ID = 0;
+        Integer blog = 0;
+        String writer = "";
+        String text = "";
+        int likeCount = 0;
+        
+        try {
+            reader = new Scanner(commentFile);
+            
+            while (reader.hasNextLine()) {
+                switch(reader.next()) {
+                    case "Yorum":
+                    
+                    case "IDN":
+                    ID = reader.nextInt();
+                    if(!reader.next().equals("KON")) {
+                        break;
+                    }
+                    case "KON":
+                    blog = reader.nextInt();
+                    if(!reader.next().equals("YZR")) {
+                        break;
+                    }
+                    case "YZR":
+                    writer = reader.next();
+                    if(!reader.next().equals("TEX")) {
+                        break;
+                    }
+                    case "TEX":
+                    text = reader.nextLine();
+                    if(!reader.next().equals("LKE")) {
+                        break;
+                    }
+                    case "LKE":
+                    likeCount = reader.nextInt();
+                    default:
+                }
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
