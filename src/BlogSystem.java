@@ -195,7 +195,7 @@ public class BlogSystem {
 
     static void blogOku(int read){
         System.out.println(blogList.get(read-1).icerik);
-        System.out.println(blogList.get(read-1).begeniSayisi);
+        System.out.println("Begeni sayisi: " + blogList.get(read-1).begeniSayisi);
         //userSession.okumaGecmisi.add().blogList.get(read-1);
         int IDs = blogList.get(read-1).ID;
         System.out.println("0 to return 1 to view comments");
